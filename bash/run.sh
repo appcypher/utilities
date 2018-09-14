@@ -122,7 +122,9 @@ setup_script() {
 	ln -s $script_path /usr/local/bin/run
 }
 
-
+# DESCRIPTION:
+#	Asks the user for confirmation befor proceeding
+#
 confirm() {
 	printf "\n::: Are you sure you want to $1? [Y/n] "
 
