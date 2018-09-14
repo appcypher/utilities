@@ -5,9 +5,9 @@ A folder containing all bash scripts I use often
 This script makes certain repetitive tasks a single command effort.
 
 The script can be setup to be availaible system-wide by running:
-```bash
-bash /path/to/run.sh setup-script
-```
+> ```bash
+> bash /path/to/run.sh setup-script
+> ```
 
 ### FEATURES
 #### GIT HELPERS
