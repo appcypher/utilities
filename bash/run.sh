@@ -72,7 +72,7 @@ update_branch() {
 	git checkout $update_branch
 }
 
-# == LOCAL == #
+# == USEFUL FUNCTIONS == #
 
 # DESCRIPTION:
 #	Gets the value following a flag
