@@ -33,11 +33,11 @@ main() {
 # == GIT HELPERS == #
 
 # DESCRIPTION:
-#	If inside a git directory, this function updates the
+#   If inside a git directory, this function updates the
 #   current or specified branch with latest changes from remote.
 #
 # USAGE:
-#	do update-branch [-b branch-to-update] [-s switch-branch]
+#	run update-branch [-b branch-to-update] [-s switch-branch]
 #
 update_branch() {
 	local return=""
