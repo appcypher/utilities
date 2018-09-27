@@ -29,7 +29,7 @@ The script can be setup to be availaible system-wide by running:
 
 * Getting changed files.
 
-    You get the files that changed or got added on your branch in respect to origin/HEAD
+    You get the files that changed or got added on your branch with respect to origin/HEAD
 
     > ```bash
     > run get-diff-files
