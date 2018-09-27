@@ -139,6 +139,7 @@ setup_script() {
 	ln -s $script_path /usr/local/bin/run
 }
 
+# TODO: return a number that can be checked fo
 # DESCRIPTION:
 #	Asks the user for confirmation befor proceeding
 #
