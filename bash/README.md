@@ -27,7 +27,7 @@ The script can be setup to be availaible system-wide by running:
     > run update-branch -b develop
     > ```
 
-* Get changed files.
+* Getting changed files.
 
     You get the files that changed or got added on your branch in respect to origin/HEAD
 
