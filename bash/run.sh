@@ -22,6 +22,9 @@ main() {
 		*update-branch* )
 			update_branch
 		;;
+		*get-diff-files* )
+			get_diff_files
+		;;
 		*setup-script* )
 			setup_script
 		;;
@@ -59,20 +62,34 @@ update_branch() {
 		update_branch=$current_branch
 	fi
 
-	display "Switch to a temporary branch"
+	displayln "Switch to a temporary branch"
 	git checkout origin/$update_branch
 
-	display "Delete previous local branch"
+	displayln "Delete previous local branch"
 	git branch -D $update_branch
 
-	display "Fetch all branches"
+	displayln "Fetch all branches"
 	git fetch --all
 
-	display "Switch back to original branch"
+	displayln "Switch back to original branch"
 	git checkout $update_branch
 }
 
-# == USEFUL FUNCTIONS == #
+# DESCRIPTION:
+#   Get files that changed or got added on your branch in respect to origin/HEAD
+#
+# USAGE:
+#	run get-diff-files
+#
+get_diff_files() {
+	display "Get last commit has"
+	local commit_hash=$(git rev-parse HEAD)
+
+	display "Show diff files"
+	git --no-pager diff --name-only $commit_hash origin/HEAD
+}
+
+# == HELPER FUNCTIONS == #
 
 # DESCRIPTION:
 #	Gets the value following a flag
@@ -141,6 +158,14 @@ confirm() {
 #	A custom print function
 #
 display() {
+	printf "::: $1 :::\n"
+}
+
+
+# DESCRIPTION:
+#	A custom print function that starts its output with a newline
+#
+displayln() {
 	printf "\n::: $1 :::\n"
 }
 
