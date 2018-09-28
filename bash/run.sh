@@ -25,6 +25,9 @@ main() {
 		*get-diff-files* )
 			get_diff_files
 		;;
+		*change-branch-name* )
+			change_branch_name ${args[0]}
+		;;
 		*setup-script* )
 			setup_script
 		;;
@@ -40,7 +43,7 @@ main() {
 #   current or specified branch with latest changes from remote.
 #
 # USAGE:
-#	run update-branch [-b branch-to-update] [-s switch-branch]
+#	run update-branch [-b branch-to-update]
 #
 update_branch() {
 	local return=""
@@ -89,6 +92,31 @@ get_diff_files() {
 	git --no-pager diff --name-only $commit_hash origin/HEAD
 }
 
+# DESCRIPTION:
+#   Change the name of a local branch and its corresponding remote branch
+#
+# USAGE:
+#	run change-branch-name new-branch-name
+#
+change_branch_name() {
+	local old_name=$()
+	local new_name=$1
+
+	if [[ -z $1 ]]; then
+		echo "You need to provide the new name of the branch"
+		exit 1
+	fi
+
+	displayln "Change local branch name"
+	git branch -m $new_name
+
+	displayln "Change remote branch name"
+	git push origin :$old_name $new_name
+
+	displayln "Set local branch to track remote branch"
+	git push origin -u $new_name
+}
+
 # == HELPER FUNCTIONS == #
 
 # DESCRIPTION:
@@ -99,7 +127,7 @@ get_flag_value() {
 	local key=$1
 	local count=0
 
-	# Look for the argument in the list of arguments
+	# For every argument in the list of arguments
 	for arg in $args; do
 		count=$((count + 1))
 		# Check if any of the argument matches the key provided
