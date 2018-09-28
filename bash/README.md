@@ -29,10 +29,16 @@ The script can be setup to be availaible system-wide by running:
 
 * Getting changed files.
 
-    You get the files that changed or got added on your branch with respect to origin/HEAD
+    You can get the files that changed or got added on your branch with respect to origin/HEAD
 
     > ```bash
     > run get-diff-files
+    > ```
+
+* Changing the name of a local branch and its corresponding remote branch
+
+    > ```bash
+    > run change-branch-name new-branch-name
     > ```
 
 ##### USEFUL BASH FUNCTIONS
