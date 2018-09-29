@@ -41,6 +41,20 @@ The script can be setup to be availaible system-wide by running:
     > run change-branch-name new-branch-name
     > ```
 
+##### FILE HELPERS
+
+* Adding Adds a symbolic link to a specified file in `/usr/local/bin` where it can be available system-wide
+
+    > ```bash
+    > run add-link link-name file-to-link
+    > ```
+
+* Removes a symbolic link from `/usr/local/bin`
+
+    > ```bash
+    > run remove-link symbolic-file
+    > ```
+
 ##### USEFUL BASH FUNCTIONS
 * Getting the running script's path
 

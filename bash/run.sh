@@ -28,6 +28,12 @@ main() {
 		*change-branch-name* )
 			change_branch_name ${args[0]}
 		;;
+		*add-link* )
+			add_link ${args[0]} ${args[1]}
+		;;
+		*remove-link* )
+			remove_link ${args[0]}
+		;;
 		*setup-script* )
 			setup_script
 		;;
@@ -115,6 +121,58 @@ change_branch_name() {
 
 	displayln "Set local branch to track remote branch"
 	git push origin -u $new_name
+}
+
+# DESCRIPTION:
+#   Adds a symbolic link to a specified file in `/usr/local/bin` where it can be
+#   available system-wide
+#
+# USAGE:
+#	run add-link link-name file-to-link
+#
+add_link() {
+	if [[ -z $1 ]]; then
+		echo "You need to specify link name!"
+		exit 1
+	fi
+
+	if [[ -z $2 ]]; then
+		echo "You need to specify the file you want to create!"
+		exit 1
+	fi
+
+	displayln "Add a link to specified file in /usr/local/bin"
+	ln -s $2 /usr/local/bin/$1
+}
+
+# DESCRIPTION:
+#   Removes a symbolic link from `/usr/local/bin`
+#
+# USAGE:
+#	run remove-link symbolic-file
+#
+remove_link() {
+	local return=""
+
+	if [[ -z $1 ]]; then
+		echo "You need to provide the symbolic file to delete!"
+		exit 1
+	fi
+
+	# Confirm deletion of local branch
+	confirm "delete this symbolic file: /usr/local/bin/$1"; return=$ret
+	if [[ $return != "Y" ]]; then
+		exit 0
+	fi
+
+	displayln "Check that file is a link"
+	if [[ ! -L "/usr/local/bin/$1" ]]; then
+		echo "What you specified is not a symbolic link!"
+		exit 1
+	fi
+
+	displayln "Remove link `/usr/local/bin`"
+	rm /usr/local/bin/$1
 }
 
 # == HELPER FUNCTIONS == #
