@@ -52,13 +52,11 @@ main() {
 #	run update-branch [-b branch-to-update]
 #
 update_branch() {
-	local return=""
 	local update_branch=""
 	local current_branch=$(git branch | grep \* | cut -d ' ' -f2)
 
 	# Confirm deletion of local branch
-	confirm "delete this local branch: $current_branch"; return=$ret
-	if [[ $return != "Y" ]]; then
+	if confirm "delete this local branch: $current_branch"; then
 		exit 0
 	fi
 
@@ -142,7 +140,7 @@ add_link() {
 	fi
 
 	displayln "Add a link to specified file in /usr/local/bin"
-	ln -s $2 /usr/local/bin/$1
+	ln -s $current_dir/$2 /usr/local/bin/$1
 }
 
 # DESCRIPTION:
@@ -152,16 +150,13 @@ add_link() {
 #	run remove-link symbolic-file
 #
 remove_link() {
-	local return=""
-
 	if [[ -z $1 ]]; then
 		echo "You need to provide the symbolic file to delete!"
 		exit 1
 	fi
 
-	# Confirm deletion of local branch
-	confirm "delete this symbolic file: /usr/local/bin/$1"; return=$ret
-	if [[ $return != "Y" ]]; then
+	if confirm "delete this symbolic file: /usr/local/bin/$1"; then
+		echo "Exiting"
 		exit 0
 	fi
 
@@ -235,9 +230,9 @@ confirm() {
 	read response
 
 	if [[ $response = "Y" ]]; then
-		ret="Y"
+		return 1
 	else
-		ret=""
+		return 0
 	fi
 }
 
