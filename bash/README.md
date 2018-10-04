@@ -5,20 +5,20 @@ A folder containing all bash scripts I use often
 This script makes certain repetitive tasks a single command effort.
 
 ### SETUP
-Clone the repository: 
-> ```bash
-> git clone https://github.com/appcypher/utilities.git
-> ```
+* Clone the repository: 
+	> ```bash
+	> git clone https://github.com/appcypher/utilities.git
+	> ```
 
-Setup  the script to be availaible system-wide:
-> ```bash
-> bash utilities/bash/run.sh setup-script
-> ```
+* Setup  the script to be availaible system-wide:
+	> ```bash
+	> bash utilities/bash/run.sh setup-script
+	> ```
 
-But, you can always run the script via the bash command:
-> ```bash
-> bash utilities/bash/run.sh [arguments]
-> ```
+* But, you can always run the script via the bash command:
+	> ```bash
+	> bash utilities/bash/run.sh [arguments]
+	> ```
 
 ### FEATURES
 ##### GIT HELPERS
