@@ -9,7 +9,7 @@ The script can be setup to be availaible system-wide by running:
 > bash /utilities/bash/run.sh setup-script
 > ```
 
-Otherwise, you can always run the script via the bash command
+Otherwise, you can always run the script via the bash command:
 > ```bash
 > bash /utilities/bash/run.sh [arguments]
 > ```
