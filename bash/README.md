@@ -111,6 +111,7 @@ This script makes certain repetitive tasks a single command effort.
     > ```bash
     > if confirm "delete this folder"; then 
     >     rm -rf $folder
+    > fi
     > ```
 
 
