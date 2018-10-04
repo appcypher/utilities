@@ -6,12 +6,12 @@ This script makes certain repetitive tasks a single command effort.
 
 The script can be setup to be availaible system-wide by running:
 > ```bash
-> bash /utilities/bash/run.sh setup-script
+> bash utilities/bash/run.sh setup-script
 > ```
 
 Otherwise, you can always run the script via the bash command:
 > ```bash
-> bash /utilities/bash/run.sh [arguments]
+> bash utilities/bash/run.sh [arguments]
 > ```
 
 ### FEATURES
