@@ -6,7 +6,12 @@ This script makes certain repetitive tasks a single command effort.
 
 The script can be setup to be availaible system-wide by running:
 > ```bash
-> bash /path/to/run.sh setup-script
+> bash /utilities/bash/run.sh setup-script
+> ```
+
+Otherwise, you can always run the script via the bash command
+> ```bash
+> bash /utilities/bash/run.sh [arguments]
 > ```
 
 ### FEATURES
@@ -35,7 +40,7 @@ The script can be setup to be availaible system-wide by running:
     > run get-diff-files
     > ```
 
-* Changing the name of a local branch and its corresponding remote branch
+* Changing the name of the current local branch and its corresponding remote branch
 
     > ```bash
     > run change-branch-name new-branch-name
