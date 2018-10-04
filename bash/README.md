@@ -4,12 +4,18 @@ A folder containing all bash scripts I use often
 
 This script makes certain repetitive tasks a single command effort.
 
-The script can be setup to be availaible system-wide by running:
+### SETUP
+Clone the repository: 
+> ```bash
+> git clone https://github.com/appcypher/utilities.git
+> ```
+
+Setup  the script to be availaible system-wide:
 > ```bash
 > bash utilities/bash/run.sh setup-script
 > ```
 
-Otherwise, you can always run the script via the bash command:
+But, you can always run the script via the bash command:
 > ```bash
 > bash utilities/bash/run.sh [arguments]
 > ```
