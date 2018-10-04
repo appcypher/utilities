@@ -102,5 +102,15 @@ This script makes certain repetitive tasks a single command effort.
     > confirm "delete this folder"
     > ```
 
-    A prompt shows that asks the user to
+    A prompt shows that asks the user to enter a `Y/n` (yes or no) answer. If the user enters `Y`, the function returns a `1` (true) otherwise it returns a `0` (false).
+    
+    > ::: Are you sure you want to delete this folder?: [Y/n] 
+    
+    With that, the developer can check for the result of the function with an `if` statement.
+    
+    > ```bash
+    > if confirm "delete this folder"; then 
+    >     rm -rf $folder
+    > ```
+
 
