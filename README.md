@@ -1,2 +1,2 @@
 # utilities
-Where I keep codes I use often
+Where I keep code I use often
