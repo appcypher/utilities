@@ -19,23 +19,26 @@ args="${@:2}" # All arguments except the first
 #
 main() {
     case $1 in
-		*update-branch* )
+		update-branch )
 			update_branch
 		;;
-		*get-diff-files* )
+		get-diff-files )
 			get_diff_files
 		;;
-		*change-branch-name* )
+		change-branch-name )
 			change_branch_name ${args[0]}
 		;;
-		*add-link* )
+		add-link )
 			add_link ${args[0]} ${args[1]}
 		;;
-		*remove-link* )
+		remove-link )
 			remove_link ${args[0]}
 		;;
-		*setup-script* )
+		setup-script )
 			setup_script
+		;;
+		--help|help|-h )
+			help
 		;;
 	esac
 
@@ -43,6 +46,25 @@ main() {
 }
 
 # == GIT HELPERS == #
+
+help() {
+	echo ""
+	echo "=============================================================="
+	echo "======================== RUN UTILITIES ======================="
+	echo "=============================================================="
+	echo "[USAGE] : run [comand] [...args]"
+	echo "[COMMAND] :"
+	echo " > help                      - print this help message"
+	echo " > update-branch -b [name]   - update a branch with changes from remote"
+	echo " > get-diff-files            - get file changed in current branch"
+	echo " > change-branch-name [name] - change the name of branch"
+	echo " > add-link [name] [file]    - make file accessible system-wide"
+	echo " > remove-link [name]        - remove link to file"
+	echo " > setup-script              - set up this command"
+	echo "=============================================================="
+	echo ""
+}
+
 
 # DESCRIPTION:
 #   If inside a git directory, this function updates the
