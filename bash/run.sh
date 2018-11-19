@@ -162,7 +162,7 @@ add_link() {
 	fi
 
 	displayln "Add a link to specified file in /usr/local/bin"
-	ln -s $current_dir/$2 /usr/local/bin/$1
+	ln -s $2 /usr/local/bin/$1
 }
 
 # DESCRIPTION:
