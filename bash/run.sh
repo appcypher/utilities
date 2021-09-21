@@ -202,15 +202,15 @@ remove_link() {
 }
 
 # DESCRIPTION:
-# Tells when command is done.
+# 	Tells when command is done.
 #
 # USAGE:
 #	run tell sleep 5
 #
 tell_when_done() {
-	$@ # Run the commands
+	$@ # Run the command
 
-	local status=$? # Get the status code
+	local status=$? # Get the exit code
 
 	if [[ $status -eq 0 ]]; then
 		echo -e "+ ${green}exit code: $status"
