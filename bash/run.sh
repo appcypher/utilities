@@ -14,6 +14,11 @@ ret=""
 # ARGUMENTS
 args="${@:2}" # All arguments except the first
 
+# COLORS
+red='\033[0;31m'
+green='\033[0;32m'
+none='\033[0m'
+
 # DESCRIPTION:
 #	Where execution starts
 #
@@ -36,6 +41,9 @@ main() {
 		;;
 		setup-script )
 			setup_script
+		;;
+		tell )
+			tell_when_done $args
 		;;
 		--help|help|-h )
 			help
@@ -60,6 +68,7 @@ help() {
 	echo " > change-branch-name [name] - change the name of branch"
 	echo " > add-link [name] [file]    - make file accessible system-wide"
 	echo " > remove-link [name]        - remove link to file"
+	echo " > tell                      - tell when command is done"
 	echo " > setup-script              - set up this command"
 	echo "=============================================================="
 	echo ""
@@ -190,6 +199,38 @@ remove_link() {
 
 	displayln "Remove link `/usr/local/bin`"
 	rm /usr/local/bin/$1
+}
+
+# DESCRIPTION:
+# Tells when command is done.
+#
+# USAGE:
+#	run tell sleep 5
+#
+tell_when_done() {
+	$@ # Run the commands
+
+	local status=$? # Get the status code
+
+	if [[ $status -eq 0 ]]; then
+		echo -e "+ ${green}exit code: $status"
+		for i in {1..10};
+		do
+			say "Command run successfully"
+			say "The command is ${args[0]}"
+			sleep 2
+		done
+	else
+		echo -e "+ ${red}exit code: $status"
+		for i in {1..10};
+		do
+			say "Command stopped running"
+			say "The command that stopped is ${args[0]}"
+			say "The exit code is $status"
+			sleep 2
+		done
+		exit $status
+	fi
 }
 
 # == HELPER FUNCTIONS == #
