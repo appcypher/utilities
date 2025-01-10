@@ -45,6 +45,9 @@ main() {
 		tell )
 			tell_when_done $args
 		;;
+		concat-files )
+			concat_files ${args[@]}
+		;;
 		--help|help|-h )
 			help
 		;;
@@ -57,20 +60,21 @@ main() {
 
 help() {
 	echo ""
-	echo "=============================================================="
-	echo "======================== RUN UTILITIES ======================="
-	echo "=============================================================="
+	echo "================================================================================="
+	echo "======================== RUN UTILITIES =========================================="
+	echo "================================================================================="
 	echo "[USAGE] : run [comand] [...args]"
 	echo "[COMMAND] :"
-	echo " > help                      - print this help message"
-	echo " > update-branch -b [name]   - update a branch with changes from remote"
-	echo " > get-diff-files            - get file changed in current branch"
-	echo " > change-branch-name [name] - change the name of branch"
-	echo " > add-link [name] [file]    - make file accessible system-wide"
-	echo " > remove-link [name]        - remove link to file"
-	echo " > tell                      - tell when command is done"
-	echo " > setup-script              - set up this command"
-	echo "=============================================================="
+	echo " > help                               - print this help message"
+	echo " > update-branch -b [name]            - update a branch with changes from remote"
+	echo " > get-diff-files                     - get file changed in current branch"
+	echo " > change-branch-name [name]          - change the name of branch"
+	echo " > add-link [name] [file]             - make file accessible system-wide"
+	echo " > remove-link [name]                 - remove link to file"
+	echo " > tell                               - tell when command is done"
+	echo " > setup-script                       - set up this command"
+	echo " > concat-files [dir] [pattern] [out] - concatenate matching files"
+	echo "================================================================================="
 	echo ""
 }
 
@@ -284,6 +288,52 @@ setup_script() {
 }
 
 # DESCRIPTION:
+#   Concatenates all files matching a pattern in a directory
+#   and writes them to an output file with headers
+#
+# USAGE:
+#   run concat-files [directory] [pattern] [output]
+#   Examples:
+#   run concat-files                    # Uses defaults: ./src "*.rs" ./combined.txt
+#   run concat-files ./code "*.go"      # Custom dir and pattern
+#   run concat-files src "*.rs" out.txt # All parameters custom
+#
+concat_files() {
+    local dir=${1:-"./src"}        # Default to ./src if not provided
+    local pattern=${2:-"*.rs"}     # Default to *.rs if not provided
+    local output=${3:-"combined.txt"} # Default output file
+
+    # Check if directory exists
+    if [[ ! -d "$dir" ]]; then
+        echo -e "${red}Error: Directory '$dir' does not exist${none}"
+        exit 1
+    }
+
+    # Create/clear output file
+    > "$output"
+
+    # Find matching files and process each one
+    find "$dir" -type f -name "$pattern" | while read -r file; do
+        # Get relative path from input directory
+        local rel_path=${file#"$dir/"}
+
+        # Add header
+        echo "=====================================================" >> "$output"
+        echo "File: $rel_path" >> "$output"
+        echo "=====================================================" >> "$output"
+        echo "" >> "$output"
+
+        # Add file contents
+        cat "$file" >> "$output"
+        echo "" >> "$output"
+        echo "" >> "$output"
+    done
+
+    local count=$(find "$dir" -type f -name "$pattern" | wc -l)
+    echo -e "${green}Successfully concatenated $count files to $output${none}"
+}
+
+# DESCRIPTION:
 #	Asks the user for confirmation befor proceeding
 #
 confirm() {
@@ -313,5 +363,5 @@ displayln() {
 	printf "\n::: $1 :::\n"
 }
 
-
 main $@
+
