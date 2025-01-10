@@ -307,7 +307,7 @@ concat_files() {
     if [[ ! -d "$dir" ]]; then
         echo -e "${red}Error: Directory '$dir' does not exist${none}"
         exit 1
-    }
+    fi
 
     # Create/clear output file
     > "$output"
